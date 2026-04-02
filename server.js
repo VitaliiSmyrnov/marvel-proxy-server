@@ -28,7 +28,6 @@ app.get('/api/characters', async (req, res) => {
           ts: ts,
           apikey: pubKey,
           hash: hash,
-          limit: 20, // можно прокидывать параметры из req.query
         },
       }
     );
