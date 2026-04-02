@@ -35,8 +35,14 @@ app.get('/api/characters', async (req, res) => {
 
     res.json(response.data);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Ошибка при запросе к Marvel API' });
+    console.error(
+      'Marvel API Error details:',
+      error.response?.data || error.message
+    );
+    res.status(500).json({
+      message: 'Ошибка при запросе к Marvel API',
+      details: error.response?.data, // Это покажет нам реальную причину от Marvel
+    });
   }
 });
 
