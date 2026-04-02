@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(cors()); // Разрешаем фронтенду делать запросы к этому серверу
+app.use(cors());
 
 const PORT = process.env.PORT || 3001;
 
@@ -15,7 +15,6 @@ app.get('/api/characters', async (req, res) => {
     const privKey = process.env.MARVEL_PRIVATE_KEY;
     const pubKey = process.env.MARVEL_PUBLIC_KEY;
 
-    // Создаем MD5 хеш: md5(ts + privateKey + publicKey)
     const hash = crypto
       .createHash('md5')
       .update(ts + privKey + pubKey)
@@ -40,7 +39,7 @@ app.get('/api/characters', async (req, res) => {
     );
     res.status(500).json({
       message: 'Ошибка при запросе к Marvel API',
-      details: error.response?.data, // Это покажет нам реальную причину от Marvel
+      details: error.response?.data,
     });
   }
 });
